@@ -1,16 +1,14 @@
 [project]
-name = "search-agent"
+name = "agents-under-the-hood"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "black>=26.3.1",
-    "debugpy>=1.8.20",
+    "black>=26.5.0",
     "isort>=8.0.1",
-    "langchain>=1.2.18",
+    "langchain>=1.3.1",
+    "langchain-ollama>=1.1.0",
     "langchain-openai>=1.2.1",
-    "langchain-tavily>=0.2.18",
     "python-dotenv>=1.2.2",
-    "tavily-python>=0.7.24",
 ]

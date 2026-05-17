@@ -1,3 +1,7 @@
+from typing import List
+
+from pydantic import BaseModel, Field
+
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -8,6 +12,26 @@ from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
 from langchain_tavily import TavilySearch
+
+class Source(BaseModel):
+
+    """
+    Schema for a source used by the agent
+    """
+    
+    url: str = Field(description="The URL of the source")
+
+    name: str = Field(description="The name of the source")
+
+class AgentResponse(BaseModel):
+    """
+    Schema for the response of the agent
+    """
+    answer: str = Field(description="The answer to the question or query")
+    sources: List[Source] = Field(default_factory=list, description="The list of sources used by the agent")
+    
+
+
 
 # The Tavily client can automatically search the .env file for the proper keys if the load_dotenv() function is called and the name of the key should be TAVILY_API_KEY
 # tavily = TavilyClient()
@@ -57,6 +81,7 @@ tools = [
 agent = create_agent(
     model=llm,
     tools=tools,
+    response_format=AgentResponse
 )
 
 
